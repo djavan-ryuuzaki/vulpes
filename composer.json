@@ -1,31 +1,33 @@
 {
-  "name": "foxlite/vulpes",
-  "description": "FoxLite Framework",
-  "keywords": ["framework", "foxlite"],
-  "license": "MIT",
-  "homepage": "http://www.foxlite.com.br",
-  "support":{
-      "issues": "https://github.com/dryuuzaki/vulpes/issues",
-      "source": "https://github.com/dryuuzaki/vulpes"
-  },
-  "authors":[
-    {
-      "name":"Djavan 'Ryuuzaki' Fernando",
-      "email": "djavan@foxlite.com.br"
-    }
-  ],
-  "require":{
-      "php": ">=5.6.0",
-      "symfony/http-foundation": "~3.2"
-  },
-  "replace": {
-      "lagopus/http": "self.version"
-  },
-  "autoload": {       
-        "psr-4": {
-            "Lagopus\\": "src/Lagopus/"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+	"name" : "foxlite/vulpes",
+	"description" : "FoxLite Framework",
+	"keywords" : [
+		"framework",
+		"foxlite"
+	],
+	"license" : "MIT",
+	"homepage" : "http://www.foxlite.com.br",
+	"support" : {
+		"issues" : "https://github.com/dryuuzaki/vulpes/issues",
+		"source" : "https://github.com/dryuuzaki/vulpes"
+	},
+	"authors" : [{
+			"name" : "Djavan 'Ryuuzaki' Fernando",
+			"email" : "djavan@foxlite.com.br"
+		}
+	],
+	"require" : {
+		"php" : ">=5.6.0",
+		"symfony/http-foundation" : "~3.2"
+	},
+	"replace" : {
+		"lagopus/http" : "self.version"
+	},
+	"autoload" : {
+		"psr-4" : {
+			"Lagopus\\" : "src/Lagopus/"
+		}
+	},
+	"minimum-stability" : "dev",
+	"prefer-stable" : true
 }
