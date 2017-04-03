@@ -19,22 +19,29 @@ class Essencia implements \JsonSerializable{
 		
 	}
 	
-	public function __call($metodo, $parametros){
-		$reflect = new ReflectionClass($this);
+	public function __call($metodo, $parametros){		
+				
+		$reflect = new \ReflectionClass($this);
 		
 		try{
+			
 			$atributo = $reflect->getProperty($metodo);
+			
 			$atributo->setAccessible(true);
+			
 			if( isset( $parametros[0] ) ){
 				$atributo->setValue($this, $parametros[0]);
 			}else{
 				return $atributo->getValue($this);
 			}
-		}catch(ReflectionException $ex){						
-			throw new Exception("A CLASSE ".$reflect->getName()." NÃO POSSUI O MÉTODO ".$metodo);
-		}
+			
+		}catch(\ReflectionException $ex){			
+			throw new \Exception("A CLASSE ".$reflect->getName()." NÃO POSSUI O MÉTODO ".$metodo);
+		}		
 		
 	}
+	
+	
 	
 	public function jsonSerialize() {
 		
@@ -54,8 +61,6 @@ class Essencia implements \JsonSerializable{
 		
 		return $arrayJson;
 	}
-	
-	
 	
 }
 
