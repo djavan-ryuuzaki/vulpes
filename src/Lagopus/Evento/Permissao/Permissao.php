@@ -3,98 +3,37 @@
 namespace Lagopus\Evento\Permissao;
 
 /**
- *  @pacote: Lagopus.Seguranca
- *  @responsabilidade: Fornecer métodos auxiliares verificar de permissoes.
- *  @comentario: Fornece métodos que auxiliam a utilização das permissoes.
+ *  @pacote: Lagopus.Permissao
+ *  @responsabilidade: Representar um conjunto de permissões.
+ *  @comentario: Níveis de Permissão:
+ *   - escopo: permissão ampla e pode se refere ao dominio a que o evento pode ser utilizador:
+ *   Ex: o evento editar.usuario só pode ser usado se para quem tiver permissão ao escopo usuario.
+ *   - papel: permissão exclusiva para quem possuir o papel (role) correto.
+ *   - ids: permissão específica para um ou mais usuários em especial. 
  *  @autor: Djavan Fernando (Djavan Ryuuzaki)
- *  @desde: 18/11/2016
+ *  @desde: 04/04/2017
  */
-use Lagopus\Evento\Acao\Acao;
+
 use Lagopus\Vulpes\Essencia;
-//require_once "nucleo/i18n/Tradutor.php";
-//require_once "nucleo/excecoes/Erro.php";
-//require_once "nucleo/excecoes/Erros.php";
+
 
 class Permissao extends Essencia {
 	
-	private $retorno;
+	private $escopo;
 	
-	public function __construct(){
+	private $papel;
+	
+	private $ids;
+	
+	public function __construct($escopo = 'GLOBAL', $papel = '',  $ids = []){
+		
+		$this->escopo = $escopo;
+		$this->papel = $papel;
+		$this->ids = $ids;
 		
 	}
 	
-	public function verificarPermissoes( Acao $acao, $escopo, $papel, $ids ){
-		
-		//$tradutor = Tradutor::instancia();
-		
-		$this->retorno = NULL;
-		
-		if( !$this->verificaEscopo($acao->permEscopo(), $escopo) ){
-			
-			//$erro = $tradutor->traduzErro("0403");
-			$erro= "ERRO ESCOPO";
-			
-			$this->retorno = $erro;
-			
-			return false;
-		}
-		
-		if( !$this->verificaPapel($acao->permPapel(), $papel) ){
-			
-			//$erro = $tradutor->traduzErro("0403");
-			$erro= "ERRO PAPEL";
-			$this->retorno = $erro;
-			
-			return false;
-		}
-		
-		if( !$this->verificaIds($acao->permIds(), $ids) ){
-			
-			//$erro = $tradutor->traduzErro("0403");
-			$erro= "ERRO ID";
-			
-			$this->retorno = $erro;
-			
-			return false;
-		}
-		
-		return true;
-		
-	}
 	
-	public function verificaEscopo($necessario, $informado){
-		return $this->verifca($necessario, $informado);
-	}
-	
-	public function verificaPapel($necessario, $informado){
-		return $this->verifca($necessario, $informado);
-	}
-	
-	public function verificaIds($necessario, $informado){
-		return $this->verifca($necessario, $informado);
-	}
-	
-	public function mensagem(){
-		return $this->retorno;
-	}
-	
-	private function verifca($necessario, $informado){
-		
-		
-		if( !is_array($necessario) ){		
-			$valorNecessario = explode(' ', trim($necessario));
-		}else{
-			$valorNecessario = $necessario;
-		}
-		
-		if( !is_array($informado) ){
-			$valorInformado  = explode(' ', trim($informado));
-		}else{
-			$valorInformado = $informado;
-		}
-		
-		return (count(array_diff( $valorInformado, $valorNecessario)) == 0);
-	}
 	
 }
 ?>

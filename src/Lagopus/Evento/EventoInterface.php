@@ -10,17 +10,18 @@ namespace Lagopus\Evento;
  *  @version 1.0.0
  */
 
-use Lagopus\Evento\Acao\Acao;
+use Lagopus\Evento\Evento;
+use Lagopous\Evento\Permissao\Permissao;
 
 interface EventoInterface {
 	
 		
-	public function on(Acao $acao);
-	public function once(Acao $acao);
-	public function removeListener(Acao $acao);
-	public function removeAllListeners($event = null);
-	public function ouvintes($event);
-	public function emit($event, array $arguments = []);
+	public function on(Evento $evento);
+	public function once(Evento $evento);
+	public function removeListener(Evento $evento);
+	public function removeAllListeners(Evento $evento);
+	public function ouvintes($nomeEvento);
+	public function emit($nomeEvento, array $argumentos = [], \Permissao $permissao);
 	
 	
 }
