@@ -13,7 +13,7 @@ namespace Lagopus\Evento;
 use Lagopus\Evento\Evento;
 use Lagopous\Evento\Permissao\Permissao;
 
-interface EventoInterface {
+interface EmissorEventoInterface {
 	
 		
 	public function on(Evento $evento);
