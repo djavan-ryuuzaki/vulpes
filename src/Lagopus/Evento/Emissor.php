@@ -28,6 +28,8 @@ class Emissor implements EmissorEventoInterface {
 	public function no(Evento $evento){
 		$this->on($evento);
 	}
+	
+	
 }
 
 ?>

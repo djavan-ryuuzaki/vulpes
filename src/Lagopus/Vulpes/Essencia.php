@@ -62,6 +62,8 @@ class Essencia implements \JsonSerializable{
 		return $arrayJson;
 	}
 	
+	
+	
 }
 
 ?>

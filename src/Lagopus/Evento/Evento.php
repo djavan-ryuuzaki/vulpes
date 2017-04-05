@@ -32,20 +32,21 @@ class Evento extends Essencia {
 	private $emissor;
 	
 	
-	public function __construct( $nome = '',  callable $metodo,  Permissao $permissao = NULL){
+	public function __construct( $nome = '',  callable $metodo,  Permissao $permissao = NULL, $emite = ''){
 		$this->nome       = $nome;
 		$this->metodo     = $metodo;		
 		$this->permissao  = $permissao;
 		$this->gerenciadorPermissao = new GerenciadorPermissao();	
 		$this->emissor = Emissor::instancia();		
+		$this->emite = $emite;
 	}
 	
 		
-	private function executar($params = NULL, Permissao $permissaoFornecida){
+	public function executar($params = NULL, Permissao $permissaoFornecida){
 		
-		if( !$this->gerenciadorPermissao->valida($this, $permissaoFornecida) ){
-			var_dump($permissaoFornecida);			
-			return $this->gerenciadorPermissao->mensagem();
+		if( !$this->gerenciadorPermissao->valida($this, $permissaoFornecida) ){	
+			
+			return $this->gerenciadorPermissao->mensagem();			
 		}
 		
 		try{
@@ -66,15 +67,7 @@ class Evento extends Essencia {
 		
 	}
 	
-	public function __call($method,$arguments) {
-		if(method_exists($this, $method)) {
-			if( $this->emite != "" ){				
-				call_user_func_array(array($this,$method),$arguments);
-			}
-			
-			return $this->emissor->emit($this->emite, $arguments[0], $this->permissao);
-		}
-	}
+	
 	
 }
 

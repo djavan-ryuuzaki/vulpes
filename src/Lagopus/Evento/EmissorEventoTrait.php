@@ -39,8 +39,10 @@ trait EmissorEventoTrait {
 		}
 	}
 	
-	public function removeAllListeners(Evento $evento= null)	{
-		if ($evento->nome()!== null) {
+	public function removeAllListeners(Evento $evento = null)	{
+		
+		if (isset($evento) && $evento->nome() != null) {
+			
 			unset($this->ouvintes[$evento->nome()]);
 		} else {
 			$this->ouvintes= [];
@@ -53,12 +55,27 @@ trait EmissorEventoTrait {
 	}
 	
 	
-	public function emit($nomeEvento, array $argumentos = [], Permissao $permissao)	{	
-		
-		foreach ($this->ouvintes($nomeEvento) as $evento) {			
-			$evento->executar($argumentos, $permissao);
+	public function emit($nomeEvento, array $argumentos = [], Permissao $permissao)	{
+		$retorno = "";
+		foreach ($this->ouvintes($nomeEvento) as $evento) {	
+			
+			if( $evento->emite() != "" ){
+				 $argumentos = array( $evento->executar($argumentos, $permissao) );
+				 $retorno = $this->emit( $evento->emite(), $argumentos, $permissao );
+				 $argumentos = array( $retorno );
+			}else{
+				 $retorno = $evento->executar($argumentos, $permissao);
+				 $argumentos = array( $retorno );
+			}
+			
 		}
+		
+		return $retorno;
 	}
+	
+	
+	
+
 }
 
 ?>
