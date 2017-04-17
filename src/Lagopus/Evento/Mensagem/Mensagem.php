@@ -18,6 +18,9 @@ class Mensagem extends Essencia{
 	
 	
 	
+	
+	
+	
 }
 
 ?>
