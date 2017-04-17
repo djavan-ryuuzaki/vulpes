@@ -3,6 +3,7 @@ namespace Lagopus\Evento;
 
 use Lagopus\Evento\Evento;
 use Lagopus\Evento\Permissao\Permissao;
+use Lagopus\Evento\Mensagem\Mensagem;
 
 trait EmissorEventoTrait {
 	
@@ -55,16 +56,17 @@ trait EmissorEventoTrait {
 	}
 	
 	
-	public function emit($nomeEvento, array $argumentos = [], Permissao $permissao)	{
+	public function emit($nomeEvento, Mensagem $mensagem, Permissao $permissao)	{
 		$retorno = "";
+		
 		foreach ($this->ouvintes($nomeEvento) as $evento) {	
 			
 			if( $evento->emite() != "" ){
-				 $argumentos = array( $evento->executar($argumentos, $permissao) );
-				 $retorno = $this->emit( $evento->emite(), $argumentos, $permissao );
+				$argumentos = array( $evento->executar($mensagem, $permissao) );
+				$retorno = $this->emit( $evento->emite(), $mensagem, $permissao );
 				 $argumentos = array( $retorno );
 			}else{
-				 $retorno = $evento->executar($argumentos, $permissao);
+				$retorno = $evento->executar($mensagem, $permissao);
 				 $argumentos = array( $retorno );
 			}
 			
