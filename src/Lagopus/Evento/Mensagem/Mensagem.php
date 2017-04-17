@@ -14,11 +14,7 @@ class Mensagem extends Essencia{
 	
 	private $tipo;
 	
-	private $conteudo;
-	
-	
-	
-	
+	private $conteudo;	
 	
 	
 }
