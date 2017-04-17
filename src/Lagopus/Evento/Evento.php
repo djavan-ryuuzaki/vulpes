@@ -13,6 +13,7 @@ use Lagopus\Vulpes\Essencia;
 use Lagopus\Evento\Emissor;
 use Lagopus\Evento\Permissao\Permissao;
 use Lagopus\Evento\Permissao\GerenciadorPermissao;
+use Lagopus\Evento\Mensagem\Mensagem;
 
 
 class Evento extends Essencia {
@@ -42,7 +43,7 @@ class Evento extends Essencia {
 	}
 	
 		
-	public function executar($params = NULL, Permissao $permissaoFornecida){
+	public function executar(Mensagem $mensagem, Permissao $permissaoFornecida){
 		
 		if( !$this->gerenciadorPermissao->valida($this, $permissaoFornecida) ){	
 			
@@ -50,11 +51,9 @@ class Evento extends Essencia {
 		}
 		
 		try{
-			if (is_array($params)){
-				return call_user_func_array($this->metodo, $params);
-			} else {
-				return call_user_func($this->metodo, $params);
-			}
+			
+			return call_user_func($this->metodo, $mensagem);
+			
 			
 		}catch (Exception $ex){
 			
@@ -65,7 +64,7 @@ class Evento extends Essencia {
 		
 		return false;
 		
-	}
+	}	
 	
 	
 	

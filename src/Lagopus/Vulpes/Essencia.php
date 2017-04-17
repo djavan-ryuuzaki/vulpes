@@ -15,6 +15,8 @@ class Essencia implements \JsonSerializable{
 	
 	protected $id;
 	
+	protected $tabela;
+	
 	public function __construct(){
 		
 	}
@@ -49,19 +51,39 @@ class Essencia implements \JsonSerializable{
 		
 		$arrayJson = array();
 		
+		$arrayTabela = array();
+		
 		$props   = $reflect->getProperties();
 		
 		foreach ( $props as $prop ){
+			
+			if( $prop->getName() == "tabela" ){
+				
+				$prop->setAccessible(true);	
+				
+				$arrayTabela[$prop->getValue($this)] = $arrayJson;
+			}
 			
 			$prop->setAccessible(true);					
 			
 			$arrayJson[$prop->getName()] = $prop->getValue($this);			
 			
-		}		
+		}
 		
-		return $arrayJson;
+		if( count($arrayTabela) > 0 ){
+			return $arrayTabela;
+		}else{		
+			return $arrayJson;
+		
+		}
 	}
 	
+	
+	protected function getUID(){
+		
+		$now = "";
+		
+	}
 	
 	
 }
