@@ -57,11 +57,11 @@ class Essencia implements \JsonSerializable{
 		
 		foreach ( $props as $prop ){
 			
-			if( $prop->getName() == "tabela" ){
+			$prop->setAccessible(true);	
+			
+			if( $prop->getName() == "tabela" && $prop->getValue($this) != "" ){				
+				$arrayTabela[$prop->getValue($this)] = $arrayJson;		
 				
-				$prop->setAccessible(true);	
-				
-				$arrayTabela[$prop->getValue($this)] = $arrayJson;
 			}
 			
 			$prop->setAccessible(true);					
@@ -70,9 +70,11 @@ class Essencia implements \JsonSerializable{
 			
 		}
 		
-		if( count($arrayTabela) > 0 ){
+		
+		if( count($arrayTabela) > 0 ){			
 			return $arrayTabela;
-		}else{		
+		}else{	
+			
 			return $arrayJson;
 		
 		}

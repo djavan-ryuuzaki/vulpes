@@ -34,6 +34,7 @@ class Evento extends Essencia {
 	
 	
 	public function __construct( $nome = '',  callable $metodo,  Permissao $permissao = NULL, $emite = ''){
+		
 		$this->nome       = $nome;
 		$this->metodo     = $metodo;		
 		$this->permissao  = $permissao;
@@ -43,23 +44,22 @@ class Evento extends Essencia {
 	}
 	
 		
-	public function executar(Mensagem $mensagem, Permissao $permissaoFornecida){
+	public function executar(Mensagem $mensagem, Permissao $permissaoFornecida){		
 		
-		if( !$this->gerenciadorPermissao->valida($this, $permissaoFornecida) ){	
-			
-			return $this->gerenciadorPermissao->mensagem();			
+		if( !$this->gerenciadorPermissao->valida($this, $permissaoFornecida) ){				
+			return $mensagem;			
 		}
 		
 		try{
 			
-			return call_user_func($this->metodo, $mensagem);
-			
+			return call_user_func($this->metodo, $mensagem);			
 			
 		}catch (Exception $ex){
 			
 			//$tradutor = Tradutor::$instancia();
 			
-			//$erro = $tradutor->traduzErro("0417");
+			//$erro = $tradutor->traduzErro("0417");			
+		
 		}
 		
 		return false;

@@ -57,14 +57,14 @@ trait EmissorEventoTrait {
 	
 	
 	public function emit($nomeEvento, Mensagem $mensagem, Permissao $permissao)	{
-		$retorno = "";
+		$retorno = $mensagem;		
 		
 		foreach ($this->ouvintes($nomeEvento) as $evento) {	
 			
-			if( $evento->emite() != "" ){
+			if( $evento->emite() != "" ){				
 				$argumentos = array( $evento->executar($mensagem, $permissao) );
 				$retorno = $this->emit( $evento->emite(), $mensagem, $permissao );
-				 $argumentos = array( $retorno );
+				$argumentos = array( $retorno );
 			}else{
 				$retorno = $evento->executar($mensagem, $permissao);
 				 $argumentos = array( $retorno );

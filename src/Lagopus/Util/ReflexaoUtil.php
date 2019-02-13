@@ -25,7 +25,7 @@ class ReflexaoUtil{
 		if ( count($matches) > 0){
 			$acao->nome( $matches[1] );
 		}else{
-			$acao->nome( "" );;
+			$acao->nome( "" );
 		}
 		
 		preg_match('/@escopo\s+([^\s]+)/', $comportamento->getDocComment(), $matches);
@@ -33,7 +33,7 @@ class ReflexaoUtil{
 		if ( count($matches) > 0){
 			$acao->escopo( $matches[1] );
 		}else{
-			$acao->escopo( "" );;
+			$acao->escopo( "" );
 		}
 		
 		preg_match('/@papel\s+([^\s]+)/', $comportamento->getDocComment(), $matches);
@@ -41,7 +41,7 @@ class ReflexaoUtil{
 		if ( count($matches) > 0){
 			$acao->papel( $matches[1] );
 		}else{
-			$acao->papel( "" );;
+			$acao->papel( "" );
 		}
 		
 		preg_match('/@emite\s+([^\s]+)/', $comportamento->getDocComment(), $matches);
@@ -49,7 +49,7 @@ class ReflexaoUtil{
 		if ( count($matches) > 0){
 			$acao->emite( $matches[1] );
 		}else{
-			$acao->emite("");;
+			$acao->emite("");
 		}
 		
 		return $acao;
