@@ -10,7 +10,6 @@ namespace Lagopus\Evento\Permissao;
  */
 use Lagopus\Evento\Evento;
 use Lagopus\Vulpes\Essencia;
-use Lagopus\Evento\Permissao\Permissao;
 //require_once "nucleo/i18n/Tradutor.php";
 //require_once "nucleo/excecoes/Erro.php";
 //require_once "nucleo/excecoes/Erros.php";

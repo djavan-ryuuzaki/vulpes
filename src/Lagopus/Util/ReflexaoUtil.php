@@ -12,6 +12,8 @@ namespace Lagopus\Util;
 
 use Lagopus\Evento\Evento;
 use ReflectionMethod;
+use ReflectionProperty;
+use ReflectionClass;
 
 class ReflexaoUtil{
 	
@@ -19,6 +21,8 @@ class ReflexaoUtil{
 	const RETORNO = "RETORNO"; 
 	
 	public static function montaAcao(ReflectionMethod $comportamento, Evento $acao){
+	    
+	    $matches = array();
 		
 		preg_match('/@acao\s+([^\s]+)/', $comportamento->getDocComment(), $matches);
 		
@@ -56,6 +60,8 @@ class ReflexaoUtil{
 	}
 	
 	public static function eAcaoOuHook(ReflectionMethod $comportamento){
+	    $matches = array();
+	    
 		preg_match('/@acao\s+([^\s]+)/', $comportamento->getDocComment(), $matches);		
 		
 		if ( count($matches) > 0){			
@@ -73,6 +79,8 @@ class ReflexaoUtil{
 	}
 	
 	public static function pegaTipoAtributo(ReflectionProperty $atributo){
+	    
+	    $matches = array();
 		
 		preg_match('/@tipo\s+([^\s]+)/', $atributo->getDocComment(), $matches);
 		
@@ -84,7 +92,7 @@ class ReflexaoUtil{
 	}
 	
 	public static function pegaPadraoData(ReflectionProperty $atributo){
-	
+	    $matches = array();
 		preg_match('/@padrao\s+([^\s]+? ([^\s]+))/', $atributo->getDocComment(), $matches);
 		if(count($matches) <= 0){
 			preg_match('/@padrao\s+([^\s]+)/', $atributo->getDocComment(), $matches);
@@ -97,7 +105,7 @@ class ReflexaoUtil{
 	}
 	
 	public static function pegaColunaAtributo(ReflectionProperty $atributo){
-		
+	    $matches = array();
 		preg_match('/@coluna\s+([^\s]+)/', $atributo->getDocComment(), $matches);		
 		
 		if ( count($matches) > 0){		
@@ -115,8 +123,12 @@ class ReflexaoUtil{
 	}		
 	
 	public static function pegaNomeTabela($objeto){
+	
 		
 		$reflect = new ReflectionClass($objeto);
+		
+		$matches = array();
+		
 		preg_match('/@tabela\s+([^\s]+)/', $reflect->getDocComment(), $matches);	
 		if ( count($matches) > 0){		
 			return $matches[1];
@@ -126,7 +138,9 @@ class ReflexaoUtil{
 	}
 	
 	public static function pegaObjeto(ReflectionProperty $atributo){
-		
+	    
+	    $matches = array();
+	    
 		preg_match('/@objeto\s+([^\s]+)/', $atributo->getDocComment(), $matches);
 		
 		if ( count($matches) > 0){
@@ -137,6 +151,8 @@ class ReflexaoUtil{
 	
 	public static function pegaObjetos(ReflectionProperty $atributo){
 		
+	    $matches = array();
+	    
 		preg_match('/@lista\s+([^\s]+)/', $atributo->getDocComment(), $matches);
 		
 		if ( count($matches) > 0){			

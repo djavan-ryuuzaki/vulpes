@@ -2,7 +2,7 @@
 
 require_once "../../vendor/autoload.php";
 
-use Lagopus\Evento\Acao;
+use Lagopus\Acao\Acao;
 
 $acao = new Acao(array(), "acaoTeste",  "escopo" , "papel", array(1,2));
 

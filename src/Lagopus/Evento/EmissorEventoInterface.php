@@ -10,9 +10,8 @@ namespace Lagopus\Evento;
  *  @version 1.0.0
  */
 
-use Lagopus\Evento\Evento;
-use Lagopous\Evento\Permissao\Permissao;
 use Lagopus\Evento\Mensagem\Mensagem;
+use Lagopus\Evento\Permissao\Permissao;
 
 interface EmissorEventoInterface {
 	
@@ -22,7 +21,7 @@ interface EmissorEventoInterface {
 	public function removeListener(Evento $evento);
 	public function removeAllListeners(Evento $evento);
 	public function ouvintes($nomeEvento);
-	public function emit($nomeEvento, Mensagem $mensagem, \Permissao $permissao);
+	public function emit($nomeEvento, Mensagem $mensagem, Permissao $permissao);
 	
 	
 }

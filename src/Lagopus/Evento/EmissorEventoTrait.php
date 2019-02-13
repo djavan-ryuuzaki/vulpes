@@ -1,9 +1,8 @@
 <?php
 namespace Lagopus\Evento;
 
-use Lagopus\Evento\Evento;
-use Lagopus\Evento\Permissao\Permissao;
 use Lagopus\Evento\Mensagem\Mensagem;
+use Lagopus\Evento\Permissao\Permissao;
 
 trait EmissorEventoTrait {
 	
@@ -26,7 +25,7 @@ trait EmissorEventoTrait {
 		
 		unset( $this->ouvintes[$evento->nome()] );
 		
-		$this->on($acao);
+		$this->on($evento);
 	}
 	
 	
@@ -61,13 +60,14 @@ trait EmissorEventoTrait {
 		
 		foreach ($this->ouvintes($nomeEvento) as $evento) {	
 			
-			if( $evento->emite() != "" ){				
-				$argumentos = array( $evento->executar($mensagem, $permissao) );
+			if( $evento->emite() != "" ){
+				
 				$retorno = $this->emit( $evento->emite(), $mensagem, $permissao );
-				$argumentos = array( $retorno );
+				
 			}else{
+			    
 				$retorno = $evento->executar($mensagem, $permissao);
-				 $argumentos = array( $retorno );
+				
 			}
 			
 		}

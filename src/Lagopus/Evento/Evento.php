@@ -9,11 +9,11 @@
 
 namespace Lagopus\Evento;
 
-use Lagopus\Vulpes\Essencia;
-use Lagopus\Evento\Emissor;
-use Lagopus\Evento\Permissao\Permissao;
-use Lagopus\Evento\Permissao\GerenciadorPermissao;
 use Lagopus\Evento\Mensagem\Mensagem;
+use Lagopus\Evento\Permissao\GerenciadorPermissao;
+use Lagopus\Evento\Permissao\Permissao;
+use Lagopus\Vulpes\Essencia;
+use Exception;
 
 
 class Evento extends Essencia {

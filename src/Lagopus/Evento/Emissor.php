@@ -2,7 +2,6 @@
 
 namespace Lagopus\Evento;
 
-use Lagopus\Evento\Evento;
 
 class Emissor implements EmissorEventoInterface {
 	use EmissorEventoTrait;
